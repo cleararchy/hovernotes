@@ -10,14 +10,7 @@
     "Other"
   ],
   "main": "./src/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "hover-notes.helloWorld",
-        "title": "Hello World"
-      }
-    ],
-    
+  "contributes": {    
     "configuration": {
       "type": "object",
       "title": "Hover Notes Configuration",

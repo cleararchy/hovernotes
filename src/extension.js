@@ -25,7 +25,7 @@ export function activate(context) {
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
 				 const config = vscode.workspace.getConfiguration('hover-notes');
-				 const notesFileSetting = config./	get('notesFile', 'private_notes.md');
+				 const notesFileSetting = config.get('notesFile', 'private_notes.md');
 				 // If absolute path, use as is; if relative, join with workspace root
 				 notesFilePath = path.isAbsolute(notesFileSetting)
 					 ? notesFileSetting
@@ -85,12 +85,6 @@ export function activate(context) {
 		}
 	});
 	context.subscriptions.push(hoverProvider);
-
-	// Existing helloWorld command
-	const disposable = vscode.commands.registerCommand('hover-notes.helloWorld', () => {
-		vscode.window.showInformationMessage('Hello World from Hover Notes!');
-	});
-	context.subscriptions.push(disposable);//n#1
 }
 
 // This method is called when your extension is deactivated
