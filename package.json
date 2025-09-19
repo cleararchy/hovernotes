@@ -1,0 +1,40 @@
+{
+  "name": "hover-notes",
+  "displayName": "Hover Notes",
+  "description": "Show hover popups for numbered notes referenced in code comments (e.g., //n#10), reading from a configurable markdown file (default: private_notes.md), with strictly numbered notes (1., 2., etc.), and only one note file.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "hover-notes.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "files": [
+    "src",
+    "parseNotes.js",
+    "private_notes.md"
+  ],
+  "scripts": {
+    "lint": "eslint src",
+    "test": "vitest run",
+    "start": "node src/extension.js"
+  },
+  "devDependencies": {
+    "eslint": "^9.34.0",
+    "vitest": "^1.0.0"
+  },
+  "type": "module",
+  "activationEvents": [
+     "onStartupFinished",
+    "onLanguage:*"
+  ]
+}

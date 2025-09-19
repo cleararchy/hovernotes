@@ -1,0 +1,12 @@
+out
+dist
+node_modules
+.vscode-test/
+.vscode/tasks.json
+*.vsix
+vsc-extension-quickstart.md
+CHANGELOG.md
+private_notes.md
+README.md
+.env
+*.log
