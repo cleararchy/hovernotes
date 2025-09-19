@@ -16,7 +16,19 @@
         "command": "hover-notes.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    
+    "configuration": {
+      "type": "object",
+      "title": "Hover Notes Configuration",
+      "properties": {
+        "hover-notes.notesFile": {
+          "type": "string",
+          "default": "private_notes.md",
+          "description": "Path to the markdown file containing numbered notes, relative to the workspace root."
+        }
+      }
+    }
   },
   "files": [
     "src",

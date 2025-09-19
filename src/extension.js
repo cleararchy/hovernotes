@@ -20,21 +20,35 @@ export function activate(context) {
 	let notesFilePath;
 
 	function refreshNotesCache() {
-		// Default to workspace root/private_notes.md
+		// Get notes file path from configuration, default to private_notes.md in workspace root
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
-		notesFilePath = path.join(root, 'private_notes.md');
-		notesCache = parseNotesFromMarkdownFile(notesFilePath);
+				 const config = vscode.workspace.getConfiguration('hover-notes');
+				 const notesFileSetting = config./	get('notesFile', 'private_notes.md');
+				 // If absolute path, use as is; if relative, join with workspace root
+				 notesFilePath = path.isAbsolute(notesFileSetting)
+					 ? notesFileSetting
+					 : path.join(root, notesFileSetting);
+				 notesCache = parseNotesFromMarkdownFile(notesFilePath);
 	}
 
 	refreshNotesCache();
+
 	// Watch for changes to the notes file
 	if (notesFilePath) {
 		fs.watch(notesFilePath, { persistent: false }, () => {
 			refreshNotesCache();
 		});
 	}
+
+	// Listen for configuration changes to refresh cache if notesFile path changes
+	const configChangeDisposable = vscode.workspace.onDidChangeConfiguration(e => {
+		if (e.affectsConfiguration('hover-notes.notesFile')) {
+			refreshNotesCache();
+		}
+	});
+	context.subscriptions.push(configChangeDisposable);
 
 	const hoverProvider = vscode.languages.registerHoverProvider({ scheme: '*', language: '*' }, {
 		provideHover(document, position, token) {
