@@ -18,15 +18,15 @@
         "hover-notes.notesFile": {
           "type": "string",
           "default": "private_notes.md",
-          "description": "Path to the markdown file containing numbered notes, relative to the workspace root."
+          "description": "Path to the markdown file containing numbered notes."
         }
       }
     }
   },
   "files": [
     "src",
-    "parseNotes.js",
-    "private_notes.md"
+    "package.json",
+    "README.md"
   ],
   "scripts": {
     "lint": "eslint src",

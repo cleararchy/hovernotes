@@ -10,7 +10,12 @@ export function activate(context) {
 	// Register hover provider for all languages
 
 	function parseNotesFromMarkdownFile(mdPath) {
-		if (!fs.existsSync(mdPath)) return {};
+		if (!fs.existsSync(mdPath)) {
+			vscode.window.showWarningMessage(
+				`Hover Notes: Could not find notes file at "${mdPath}". Please check settings.`
+			);
+			return {};
+		}
 		const content = fs.readFileSync(mdPath, 'utf8');
 		return parseNotesFromMarkdownContent(content);
 	}
