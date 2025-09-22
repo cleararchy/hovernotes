@@ -1,8 +1,9 @@
 {
   "name": "hover-notes",
   "displayName": "Hover Notes",
-  "description": "Show hover popups for numbered notes referenced in code comments (e.g., //n#10), reading from a configurable markdown file (default: private_notes.md), with strictly numbered notes (1., 2., etc.), and only one note file.",
+  "description": "Show hover popups for numbered notes referenced in code comments (e.g., //note#10)",
   "version": "0.0.1",
+   "license": "ISC",
   "engines": {
     "vscode": "^1.104.0"
   },
@@ -36,7 +37,9 @@
   "files": [
     "src",
     "package.json",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "scripts": {
     "lint": "eslint src",
@@ -52,5 +55,9 @@
      "onStartupFinished",
     "onLanguage:plaintext",
     "onHover"
-  ]
+  ],
+ "repository": {
+    "type": "git",
+    "url": "https://github.com/cleararchy/hovernotes.git"
+  }
 }
