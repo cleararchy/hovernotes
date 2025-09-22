@@ -7,6 +7,5 @@ node_modules
 vsc-extension-quickstart.md
 CHANGELOG.md
 private_notes.md
-README.md
 .env
 *.log
