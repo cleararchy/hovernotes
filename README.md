@@ -33,7 +33,7 @@ Once you start cross-referncing notes in your code, you might want to include a 
 
 ## Extension Settings
 
-1. Path to your notes file.
+1. **Path to your notes file.** (Set this first.)
 2. The cross-ref prefix you want to use. e.g. n, note, see, etc.
 3. Line limit
 
@@ -46,7 +46,7 @@ Once you start cross-referncing notes in your code, you might want to include a 
 
 Last Updated: Sept 2025
 
-### 1.0.0
+### 0.0.1
 
 Initial release
 

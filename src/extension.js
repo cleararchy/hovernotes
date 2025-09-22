@@ -8,7 +8,7 @@ export function activate(context) {
 	function parseNotesFromMarkdownFile(mdPath, maxNoteLines) {
 		if (!fs.existsSync(mdPath)) {
 			vscode.window.showWarningMessage(
-				`Hover Notes: Could not find notes file at "${mdPath}". Please check settings.`
+				`CrossRef Notes: Could not find notes file at "${mdPath}". Please check settings.`
 			);
 			return {};
 		}
@@ -23,7 +23,7 @@ export function activate(context) {
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
-		const config = vscode.workspace.getConfiguration('hover-notes');
+		const config = vscode.workspace.getConfiguration('crossref-notes');
 		const notesFileSetting = config.get('notesFile', 'private_notes.md');
 		const maxNoteLines = config.get('maxNoteLines', 20);
 		// If absolute path, use as is; if relative, join with workspace root
@@ -44,7 +44,7 @@ export function activate(context) {
 
 	// Listen for configuration changes to refresh cache if notesFile path changes
 	const configChangeDisposable = vscode.workspace.onDidChangeConfiguration(e => {
-		if (e.affectsConfiguration('hover-notes.notesFile')) {
+		if (e.affectsConfiguration('crossref-notes.notesFile')) {
 			refreshNotesCache();
 		}
 	});
@@ -58,7 +58,7 @@ export function activate(context) {
 			}
 			const line = document.lineAt(position.line).text;
 			// Build regex from user-configurable prefix, match ':' or '#' after prefix, then optional whitespace and a number
-			const config = vscode.workspace.getConfiguration('hover-notes');
+			const config = vscode.workspace.getConfiguration('crossref-notes');
 			let prefix = config.get('crossRefPrefix', 'n');
 			// Escape regex special characters in the prefix
 			let regexString = `(?:\\/\\/|#)\\s*` + prefix.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*[:#]\\s*(\\d+)';
