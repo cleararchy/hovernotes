@@ -9,7 +9,7 @@ import { parseNotesFromMarkdownContent } from './parseNotes.js';
 export function activate(context) {
 	// Register hover provider for all languages
 
-	function parseNotesFromMarkdownFile(mdPath) {
+	function parseNotesFromMarkdownFile(mdPath, maxNoteLines) {
 		if (!fs.existsSync(mdPath)) {
 			vscode.window.showWarningMessage(
 				`Hover Notes: Could not find notes file at "${mdPath}". Please check settings.`
@@ -17,7 +17,7 @@ export function activate(context) {
 			return {};
 		}
 		const content = fs.readFileSync(mdPath, 'utf8');
-		return parseNotesFromMarkdownContent(content);
+		return parseNotesFromMarkdownContent(content, maxNoteLines);
 	}
 
 	// Cache notes for quick lookup
@@ -25,17 +25,18 @@ export function activate(context) {
 	let notesFilePath;
 
 	function refreshNotesCache() {
-		// Get notes file path from configuration, default to private_notes.md in workspace root
+		// Get notes file path and max lines from configuration
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
-				 const config = vscode.workspace.getConfiguration('hover-notes');
-				 const notesFileSetting = config.get('notesFile', 'private_notes.md');
-				 // If absolute path, use as is; if relative, join with workspace root
-				 notesFilePath = path.isAbsolute(notesFileSetting)
-					 ? notesFileSetting
-					 : path.join(root, notesFileSetting);
-				 notesCache = parseNotesFromMarkdownFile(notesFilePath);
+		const config = vscode.workspace.getConfiguration('hover-notes');
+		const notesFileSetting = config.get('notesFile', 'private_notes.md');
+		const maxNoteLines = config.get('maxNoteLines', 20);
+		// If absolute path, use as is; if relative, join with workspace root
+		notesFilePath = path.isAbsolute(notesFileSetting)
+			? notesFileSetting
+			: path.join(root, notesFileSetting);
+		notesCache = parseNotesFromMarkdownFile(notesFilePath, maxNoteLines);
 	}
 
 	refreshNotesCache();
@@ -97,3 +98,9 @@ export function deactivate() {}
 
 // Add this line to ensure default export for activate
 export default activate;
+
+// TODO: limit to 30 lines
+// make the search pattern n# configurable
+// more comment styles
+// activate without restart
+// instruct AI to preserve my notes comments when editing

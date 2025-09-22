@@ -19,6 +19,11 @@
           "type": "string",
           "default": "private_notes.md",
           "description": "Path to the markdown file containing numbered notes."
+        },
+        "hover-notes.maxNoteLines": {
+          "type": "number",
+          "default": 20,
+          "description": "Maximum number of lines to display for a note."
         }
       }
     }
