@@ -63,8 +63,12 @@ export function activate(context) {
 				return undefined;
 			}
 			const line = document.lineAt(position.line).text;
-			// Look for //n#<number> or #n#<number> in the line
-			const regex = /(?:\/\/|#)n#(\d+)/g;
+			// Build regex from user-configurable prefix, match ':' or '#' after prefix, then optional whitespace and a number
+			const config = vscode.workspace.getConfiguration('hover-notes');
+			let prefix = config.get('crossRefPrefix', 'n');
+			// Escape regex special characters in the prefix
+			let regexString = `(?:\\/\\/|#)\\s*` + prefix.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*[:#]\\s*(\\d+)';
+			const regex = new RegExp(regexString, 'g');
 			let match;
 			let found = false;
 			let noteNumber = '';
@@ -84,7 +88,7 @@ export function activate(context) {
 					md.isTrusted = false;
 					return new vscode.Hover(md);
 				} else {
-					return new vscode.Hover(`Note #${noteNumber} not found in notes file.`);
+					return new vscode.Hover(`Note #${noteNumber} not found in notes file: ${notesFilePath}`);
 				}
 			}
 			return undefined;
@@ -99,8 +103,9 @@ export function deactivate() {}
 // Add this line to ensure default export for activate
 export default activate;
 
-// TODO: limit to 30 lines
+// TODO
 // make the search pattern n# configurable
 // more comment styles
 // activate without restart
 // instruct AI to preserve my notes comments when editing
+//n#1

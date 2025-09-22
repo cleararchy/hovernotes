@@ -24,6 +24,11 @@
           "type": "number",
           "default": 20,
           "description": "Maximum number of lines to display for a note."
+        },
+        "hover-notes.crossRefPrefix": {
+          "type": "string",
+          "default": "n",
+          "description": "Prefix string to match for note cross-references (e.g., n#, note#, note:, etc.). Don't inlcude the # or : suffix. That's automatic."
         }
       }
     }
@@ -45,6 +50,7 @@
   "type": "module",
   "activationEvents": [
      "onStartupFinished",
-    "onLanguage:*"
+    "onLanguage:plaintext",
+    "onHover"
   ]
 }
