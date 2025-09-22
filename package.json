@@ -4,6 +4,7 @@
   "description": "Show hover popups for numbered notes referenced in code comments (e.g., //note#10)",
   "version": "0.0.1",
    "license": "ISC",
+   "publisher": "SriramN",
   "engines": {
     "vscode": "^1.104.0"
   },
