@@ -1,13 +1,9 @@
-// The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { parseNotesFromMarkdownContent } from './parseNotes.js';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context) {
-	// Register hover provider for all languages
 
 	function parseNotesFromMarkdownFile(mdPath, maxNoteLines) {
 		if (!fs.existsSync(mdPath)) {
@@ -20,12 +16,10 @@ export function activate(context) {
 		return parseNotesFromMarkdownContent(content, maxNoteLines);
 	}
 
-	// Cache notes for quick lookup
 	let notesCache = {};
 	let notesFilePath;
 
 	function refreshNotesCache() {
-		// Get notes file path and max lines from configuration
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
@@ -97,10 +91,8 @@ export function activate(context) {
 	context.subscriptions.push(hoverProvider);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
 
-// Add this line to ensure default export for activate
 export default activate;
 
 // TODO
