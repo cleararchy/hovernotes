@@ -104,8 +104,4 @@ export function deactivate() {}
 export default activate;
 
 // TODO
-// make the search pattern n# configurable
 // more comment styles
-// activate without restart
-// instruct AI to preserve my notes comments when editing
-//n#1
