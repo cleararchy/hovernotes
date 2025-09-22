@@ -1,6 +1,10 @@
 # README
 
-It is a good practice to cross-reference relevant notes in your source code (e.g. like this: // note: 123). This extension pop-ups the note (in markdown format) as you hover over the cross-ref. I developed it to keep track code improvements (stuff that I wasn't aware of) suggested by AI.
+Cross-reference relevant notes in your source code like below.
+
+![Screenshot](./screenshot4readme.png)
+
+This extension pop-ups the note (in markdown format) as you hover over the cross-ref. Among other uses, I also use it to keep track code improvements (stuff that I wasn't aware of) suggested by AI.
 
 
 ## Requirements
