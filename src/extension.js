@@ -61,7 +61,7 @@ export function activate(context) {
 			const config = vscode.workspace.getConfiguration('crossref-notes');
 			let prefix = config.get('crossRefPrefix', 'n');
 			// Escape regex special characters in the prefix
-			let regexString = `(?:\\/\\/|#)\\s*` + prefix.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*[:#]\\s*(\\d+)';
+			let regexString = `(?:\\/\\/|#|--|;)\\s*` + prefix.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*[:#]\\s*(\\d+)';
 			const regex = new RegExp(regexString, 'g');
 			let match;
 			let found = false;
