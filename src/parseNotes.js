@@ -16,3 +16,19 @@ export function parseNotesFromMarkdownContent(content, maxNoteLines = 20) {
     return notes;
 }
 
+export function findNoteReferenceInLine(line, position, prefix) {
+    let regexString = `(?:\\/\\/|#|--|;)\\s*` + prefix + '\\s*[:#]\\s*(\\d+)';
+    const regex = new RegExp(regexString, 'g');
+    let match;
+    while ((match = regex.exec(line)) !== null) {
+        const start = match.index;
+        const end = start + match[0].length;
+        // vscode behavior: position can be a number (character index) or an object with .character
+        const char = typeof position === 'number' ? position : position.character;
+        if (char >= start && char <= end) {
+            return { found: true, noteNumber: match[1] };
+        }
+    }
+    return { found: false, noteNumber: '' };
+}
+

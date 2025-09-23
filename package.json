@@ -2,9 +2,9 @@
   "name": "crossref-notes",
   "displayName": "CrossRef Notes",
   "description": "Show hover popups for numbered notes cross-referenced in code comments (e.g., //note#10)",
-  "version": "0.0.1",
-   "license": "ISC",
-   "publisher": "SriramN",
+  "version": "0.0.2",
+  "license": "ISC",
+  "publisher": "SriramN",
   "engines": {
     "vscode": "^1.104.0"
   },
@@ -12,25 +12,28 @@
     "Other"
   ],
   "main": "./src/extension.js",
-  "contributes": {    
+  "contributes": {
     "configuration": {
-      "type": "object",
-      "title": "CrossRef Notes Configuration",
+      "title": "CrossRef Notes",
       "properties": {
         "crossref-notes.notesFile": {
           "type": "string",
           "default": "private_notes.md",
-          "description": "Path to the markdown file containing numbered notes."
+          "description": "Path to the markdown file containing notes. Can be absolute or relative to workspace root."
         },
         "crossref-notes.maxNoteLines": {
           "type": "number",
-          "default": 20,
-          "description": "Maximum number of lines to display for a note."
+          "default": 5,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum number of lines to include for each note from the notes file."
         },
         "crossref-notes.crossRefPrefix": {
           "type": "string",
           "default": "n",
-          "description": "Prefix string to match for note cross-references (e.g., n#, note#, note:, etc.). Don't inlcude the # or : suffix. That's automatic."
+          "markdownDescription": "Prefix for note cross-references in code comments (e.g., //n:#10). **Must be a string of letters only (A-Z, a-z).** If this setting is invalid, a warning will be shown and notes will not be matched.",
+          "pattern": "^[A-Za-z]+$",
+          "patternErrorMessage": "Prefix must be a string of letters only (A-Z, a-z)."
         }
       }
     }
@@ -54,11 +57,11 @@
   },
   "type": "module",
   "activationEvents": [
-     "onStartupFinished",
+    "onStartupFinished",
     "onLanguage:plaintext",
     "onHover"
   ],
- "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/cleararchy/hovernotes.git"
   }

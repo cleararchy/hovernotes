@@ -6,7 +6,13 @@ Cross-reference relevant notes in your source code like below.
 
 This extension pop-ups the note (in markdown format) as you hover over the cross-ref. Among other uses, I also use it to keep track code improvements (stuff that I wasn't aware of) suggested by AI.
 
-
+## Supported Comment Styles
+```
+// Javascript, Java, C#, C, etc.
+# python, bash, etc.
+-- SQL, Haskell, etc.
+; Lisp, Clojure, etc.Lisp, Clojure, etc.
+```
 ## Requirements
 
 Keep all your notes in one markdown file formatted as below. They may be cross-reference in any code file as `//note#<note-number>` or `# note:<note-number>` depending on the syntax of a single-line comment in your language.
@@ -39,15 +45,12 @@ Once you start cross-referncing notes in your code, you might want to include a 
 
 ## Known Issues
 
-- Currently limited to languages that support `//` or `#` for a single line comment
-- Not sure about images in the notes
+- Doesn't render images in the notes.
 
 ## Release Notes
 
 Last Updated: Sept 2025
 
-### 0.0.1
-
-Initial release
+Please see the Change Log.
 
 ---

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-import { parseNotesFromMarkdownContent } from './parseNotes.js';
+import { parseNotesFromMarkdownContent, findNoteReferenceInLine } from './parseNotes.js';
 
 export function activate(context) {
 
@@ -25,7 +25,7 @@ export function activate(context) {
 		const root = workspaceFolders[0].uri.fsPath;
 		const config = vscode.workspace.getConfiguration('crossref-notes');
 		const notesFileSetting = config.get('notesFile', 'private_notes.md');
-		const maxNoteLines = config.get('maxNoteLines', 20);
+		const maxNoteLines = config.get('maxNoteLines', 5);
 		// If absolute path, use as is; if relative, join with workspace root
 		notesFilePath = path.isAbsolute(notesFileSetting)
 			? notesFileSetting
@@ -60,21 +60,14 @@ export function activate(context) {
 			// Build regex from user-configurable prefix, match ':' or '#' after prefix, then optional whitespace and a number
 			const config = vscode.workspace.getConfiguration('crossref-notes');
 			let prefix = config.get('crossRefPrefix', 'n');
-			// Escape regex special characters in the prefix
-			let regexString = `(?:\\/\\/|#|--|;)\\s*` + prefix.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*[:#]\\s*(\\d+)';
-			const regex = new RegExp(regexString, 'g');
-			let match;
-			let found = false;
-			let noteNumber = '';
-			while ((match = regex.exec(line)) !== null) {
-				const start = match.index;
-				const end = start + match[0].length;
-				if (position.character >= start && position.character <= end) {
-					found = true;
-					noteNumber = match[1];
-					break;
-				}
+			// Validate prefix: must be a string of alphabets only
+			if (!/^[A-Za-z]+$/.test(prefix)) {
+				vscode.window.showWarningMessage(
+					`CrossRef Notes: The crossRefPrefix setting ('${prefix}') is invalid. It must be a string of letters only (A-Z, a-z).`
+				);
+				return undefined;
 			}
+			const { found, noteNumber } = findNoteReferenceInLine(line, position, prefix);
 			if (found && noteNumber) {
 				const note = notesCache[noteNumber];
 				if (note) {
