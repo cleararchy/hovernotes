@@ -54,4 +54,14 @@ Add more notes as needed.
 		assert.deepStrictEqual(findNoteReferenceInLine(line, 20, 'n'), { found: true, noteNumber: '7' });
 	});
 
+	test('findNoteReferenceInLine works with REM comments (batch files)', () => {
+		const line = 'REM n:12 this is a batch note';
+		const result = findNoteReferenceInLine(line, 0, 'n');
+		assert.deepStrictEqual(result, { found: true, noteNumber: '12' });
+
+		const line2 = 'rem see#99 another batch note';
+		const result2 = findNoteReferenceInLine(line2, 0, 'see');
+		assert.deepStrictEqual(result2, { found: true, noteNumber: '99' });
+	});
+
 });

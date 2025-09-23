@@ -17,8 +17,10 @@ export function parseNotesFromMarkdownContent(content, maxNoteLines = 20) {
 }
 
 export function findNoteReferenceInLine(line, position, prefix) {
-    let regexString = `(?:\\/\\/|#|--|;)\\s*` + prefix + '\\s*[:#]\\s*(\\d+)';
-    const regex = new RegExp(regexString, 'g');
+    // position is where the hover occured on the line
+    // Support: //, #, --, ;, REM (case-insensitive, optional space)
+    let regexString = `(?:\\/\\/|#|--|;|REM\\s+)\\s*` + prefix + '\\s*[:#]\\s*(\\d+)';
+    const regex = new RegExp(regexString, 'gi');
     let match;
     while ((match = regex.exec(line)) !== null) {
         const start = match.index;

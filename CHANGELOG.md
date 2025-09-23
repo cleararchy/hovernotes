@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.3] - 23-Sep-2025
+
+- Support REM comments (Windows batch file)
+
 ## [0.0.2] - 23-Sep-2025
 
 - Support -- (SQL) and ; (Lisp, Clojure, etc.) comments

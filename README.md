@@ -9,9 +9,10 @@ This extension pop-ups the note (in markdown format) as you hover over the cross
 ## Supported Comment Styles
 ```
 // Javascript, Java, C#, C, etc.
-# python, bash, etc.
+# python, R, shell, powershell, perl etc.
 -- SQL, Haskell, etc.
-; Lisp, Clojure, etc.Lisp, Clojure, etc.
+; Lisp, Clojure, etc.
+REM windows batch file
 ```
 ## Requirements
 
