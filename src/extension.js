@@ -24,7 +24,7 @@ export function activate(context) {
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
 		const config = vscode.workspace.getConfiguration('crossref-notes');
-		const notesFileSetting = config.get('notesFile', 'private_notes.md');
+		const notesFileSetting = config.get('notesFile', 'notes.md');
 		const maxNoteLines = config.get('maxNoteLines', 5);
 		// If absolute path, use as is; if relative, join with workspace root
 		notesFilePath = path.isAbsolute(notesFileSetting)

@@ -40,7 +40,7 @@ Once you start cross-referncing notes in your code, you might want to include a 
 
 ## Extension Settings
 
-1. **Path to your notes file.** (Set this first.)
+1. **Path to your notes file.** (Set this first). By default, the extension looks for `notes.md` in the workspace root. The file can be anywhere (absolute path). It doesn't have to be under your workspace root or under version control.
 2. The cross-ref prefix you want to use. e.g. n, note, see, etc.
 3. Line limit
 

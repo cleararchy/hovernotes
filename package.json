@@ -18,8 +18,11 @@
       "properties": {
         "crossref-notes.notesFile": {
           "type": "string",
-          "default": "private_notes.md",
-          "description": "Path to the markdown file containing notes. Can be absolute or relative to workspace root."
+          "default": "notes.md",
+          "description": "Path to the markdown file containing notes. Can be absolute or relative to workspace root.",
+          "minLength": 1,
+          "pattern": ".+",
+          "patternErrorMessage": "Path cannot be blank."
         },
         "crossref-notes.maxNoteLines": {
           "type": "number",

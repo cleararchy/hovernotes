@@ -3,6 +3,7 @@
 ## [0.0.3] - 23-Sep-2025
 
 - Support REM comments (Windows batch file)
+- Rename default notes file to `notes.md`
 
 ## [0.0.2] - 23-Sep-2025
 
