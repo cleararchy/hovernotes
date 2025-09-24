@@ -24,8 +24,8 @@ export function activate(context) {
 		if (!workspaceFolders || workspaceFolders.length === 0) return;
 		const root = workspaceFolders[0].uri.fsPath;
 		const config = vscode.workspace.getConfiguration('crossref-notes');
-		const notesFileSetting = config.get('notesFile', 'notes.md');
-		const maxNoteLines = config.get('maxNoteLines', 5);
+		const notesFileSetting = config.get('notesFile');
+		const maxNoteLines = config.get('maxNoteLines');
 		// If absolute path, use as is; if relative, join with workspace root
 		notesFilePath = path.isAbsolute(notesFileSetting)
 			? notesFileSetting
@@ -59,7 +59,7 @@ export function activate(context) {
 			const line = document.lineAt(position.line).text;
 			// Build regex from user-configurable prefix, match ':' or '#' after prefix, then optional whitespace and a number
 			const config = vscode.workspace.getConfiguration('crossref-notes');
-			let prefix = config.get('crossRefPrefix', 'n');
+			let prefix = config.get('crossRefPrefix');
 			// Validate prefix: must be a string of alphabets only
 			if (!/^[A-Za-z]+$/.test(prefix)) {
 				vscode.window.showWarningMessage(
@@ -87,6 +87,3 @@ export function activate(context) {
 export function deactivate() {}
 
 export default activate;
-
-// TODO
-// more comment styles
