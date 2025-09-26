@@ -5,7 +5,7 @@ import { parseNotesFromMarkdownContent, findNoteReferenceInLine } from './parseN
 
 export function activate(context) {
 
-	function parseNotesFromMarkdownFile(mdPath, maxNoteLines) {
+	function parseNotesFile(mdPath, maxNoteLines) {
 		if (!fs.existsSync(mdPath)) {
 			vscode.window.showWarningMessage(
 				`CrossRef Notes: Could not find notes file at "${mdPath}". Please check settings.`
@@ -30,7 +30,10 @@ export function activate(context) {
 		notesFilePath = path.isAbsolute(notesFileSetting)
 			? notesFileSetting
 			: path.join(root, notesFileSetting);
-		notesCache = parseNotesFromMarkdownFile(notesFilePath, maxNoteLines);
+		notesCache = parseNotesFile(notesFilePath, maxNoteLines);
+		if (Object.keys(notesCache).length > 0) vscode.window.showInformationMessage(
+			`CrossRef Notes:\nLoaded notes file at:\n${notesFilePath}`
+		);
 	}
 
 	refreshNotesCache();

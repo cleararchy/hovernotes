@@ -2,7 +2,7 @@
   "name": "crossref-notes",
   "displayName": "CrossRef Notes",
   "description": "Show hover popups for numbered notes cross-referenced in code comments (e.g., //note#10)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "ISC",
   "publisher": "SriramN",
   "engines": {
@@ -34,7 +34,7 @@
         "crossref-notes.crossRefPrefix": {
           "type": "string",
           "default": "n",
-          "markdownDescription": "Prefix for note cross-references in code comments (e.g., //n:#10). **Must be a string of letters only (A-Z, a-z).** If this setting is invalid, a warning will be shown and notes will not be matched.",
+          "markdownDescription": "Prefix for note cross-references in code comments (e.g., //n:#10). **Must be a string of letters only (A-Z, a-z).**",
           "pattern": "^[A-Za-z]+$",
           "patternErrorMessage": "Prefix must be a string of letters only (A-Z, a-z)."
         }

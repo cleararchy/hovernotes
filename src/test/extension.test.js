@@ -64,4 +64,11 @@ Add more notes as needed.
 		assert.deepStrictEqual(result2, { found: true, noteNumber: '99' });
 	});
 
+	test('findNoteReferenceInLine works with HTML and CSS single-line comments', () => {
+		const htmlLine = '<!-- n:88 this is an html comment -->';
+		const cssLine = '/* n:77 this is a css comment */';
+		assert.deepStrictEqual(findNoteReferenceInLine(htmlLine, 0, 'n'), { found: true, noteNumber: '88' });
+		assert.deepStrictEqual(findNoteReferenceInLine(cssLine, 0, 'n'), { found: true, noteNumber: '77' });
+	});
+
 });
