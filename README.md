@@ -13,6 +13,8 @@ This extension pop-ups the note (in markdown format) as you hover over the cross
 -- SQL, Haskell, etc.
 ; Lisp, Clojure, etc.
 REM windows batch file
+<!-- html comment -->
+/* CSS comment */
 ```
 ## Requirements
 
